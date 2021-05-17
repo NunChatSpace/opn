@@ -1,6 +1,6 @@
 # Reborn Installation
 1. After clone this reposity change directory to root of project
-2. run command "docker build -t testdockerfile .".
+2. run command "docker build -t rebornapp .".
 3. run command "docker compose up".
 4. After docker container is started then cannot access to "localhost:4000" run command "docker compose up" again
 5. Go to "localhost:4000"
