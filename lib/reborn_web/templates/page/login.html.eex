@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  </head>
+  <body>
+    <section>
+      <%= form_for @conn, Routes.page_path(@conn, :login_user), [as: :credentials], fn f -> %>
+
+        <%= text_input f, :username, placeholder: "Username" %>
+
+        <%= text_input f, :password, placeholder: "Password", type: "password" %>
+
+        <%= submit "Log in", class: "login" %>
+
+      <% end %>
+    </section>
+  </body>
+</html>

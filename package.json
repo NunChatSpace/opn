@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "browserlist": "^1.0.1",
+    "browserslist": "^4.16.6"
+  },
+  "devDependencies": {
+    "webpack": "^5.37.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

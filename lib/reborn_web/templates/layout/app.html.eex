@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Reborn · Phoenix Framework</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/bootstrap.css") %>">
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/bootstrap.js") %>"></script>
+  </head>
+  <body>
+      <header>
+        <%= link "", class: "logo", to: Routes.page_path(@conn, :index) %>
+        <%= if logged_in?(@conn) do %>
+
+        <div class="container">
+          <div class="row">
+              <div class="col-4">
+                  <div class="d-flex justify-content-start align-middle">
+                    <img style="width:40px; height:40px" src=<%= avatar(@conn) %> />
+                    <div class="align-middle">
+                      <p><%= username(@conn) %></p>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-8">
+                <div class="d-flex justify-content-end align-middle">
+                  <%= link "Log out", to: Routes.page_path(@conn, :logout) %>
+                </div>
+              </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex justify-content-end ">
+                <div style="padding:3px">
+                  <%= link "Log in", to: Routes.page_path(@conn, :login), class: "btn btn-primary" %>
+                </div>
+                <div style="padding:3px">
+                  <%= link "Sign Up", to: Routes.page_path(@conn, :signup), class: "btn btn-primary" %>
+                </div>
+            </div>
+         </div>
+        </div>
+      <% end %>
+    </header>
+    <main role="main" class="container">
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= @inner_content %>
+    </main>
+  </body>
+</html>

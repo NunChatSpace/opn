@@ -1,0 +1,34 @@
+version: '3.2'
+services:
+    db:
+        image: mysql:latest
+        container_name: mysql-for-reborn
+        restart: always
+        ports: 
+            - "3306:3306"
+        expose:
+            - "3306"
+        environment:
+            DB_USERNAME: reborn_dev
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: reborn_dev
+    app:
+        image: rebornapp
+        ports:
+          - "4000:4000"
+        environment:
+          - MIX_ENV=dev
+          - PORT=4000
+        container_name: "reborn"
+        working_dir: "/src"
+        command: >
+          bash -c "
+            export SECRET_KEY_BASE=IoxkIHMfSlhguAV5wRRyk5sfZtEMq7hl5dw3josqyQLN4Hdok/f11D1zKKekbguF &&
+
+            mix ecto.create &&
+            mix phx.gen.schema User users username:string email:string encrypted_password:string && 
+            mix ecto.migrate &&
+            PORT=4000 MIX_ENV=prod mix phx.server
+            "
+        links:
+          - db
